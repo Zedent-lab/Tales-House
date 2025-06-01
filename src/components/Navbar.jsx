@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
-import { AuthContext } from '../contexts/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import { useTheme } from "../context/ThemeContext";
 
 export default function Navbar() {
@@ -12,7 +10,7 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const { theme } = useTheme();
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +24,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
+      await logout();
       navigate('/');
       setIsOpen(false);
     } catch (error) {
@@ -60,52 +58,70 @@ export default function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group" aria-label="Tales House Home">
             <div className="w-24 h-24">
-              <img src="https://i.imgur.com/XkDQqzr.png" alt="Logo" className="w-full h-full object-contain group-hover:brightness-125 transition-all duration-300" />
+              <img 
+                src="https://i.imgur.com/XkDQqzr.png" 
+                alt="Logo" 
+                className="w-full h-full object-contain group-hover:brightness-125 transition-all duration-300" 
+              />
             </div>
             <div className="relative">
-              <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text">Tale House</span>
+              <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text">
+                Tales House
+              </span>
               <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/40 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
             </div>
           </Link>
 
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center space-x-8">
-            {navLinks.map(({ to, label, protected: isProtected }) => (
-              <li key={to}>
-                <NavLink
-                  to={to}
-                  className={({ isActive }) =>
-                    `px-4 py-2 text-sm font-medium ${isActive ? activeClass : inactiveClass}`
-                  }
-                >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
+            {navLinks.map(({ to, label, protected: isProtected }) => {
+              // Hide protected routes if user is not logged in
+              if (isProtected && !user) return null;
+              
+              return (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    className={({ isActive }) =>
+                      `px-4 py-2 text-sm font-medium ${isActive ? activeClass : inactiveClass}`
+                    }
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              );
+            })}
             
             {/* Auth Section */}
             {loading ? (
-              <li>
+              <li className="flex items-center">
                 <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-400"></div>
               </li>
             ) : user ? (
               <>
                 {/* User Info */}
                 <li className="flex items-center space-x-3">
-                  <img
-                    src={user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || user.email)}&background=7c3aed&color=fff`}
-                    alt="Profile"
-                    className="w-8 h-8 rounded-full border-2 border-purple-400/50 hover:border-purple-400 transition-colors duration-300"
-                  />
-                  <span className="text-sm text-gray-300 hidden lg:block">
+                  <div className="relative group">
+                    <img
+                      src={user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || user.email)}&background=7c3aed&color=fff`}
+                      alt="Profile"
+                      className="w-8 h-8 rounded-full border-2 border-purple-400/50 hover:border-purple-400 transition-colors duration-300 cursor-pointer"
+                    />
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                      {user.displayName || user.email?.split('@')[0]}
+                    </div>
+                  </div>
+                  <span className="text-sm text-gray-300 hidden lg:block max-w-32 truncate">
                     {user.displayName || user.email?.split('@')[0]}
                   </span>
                 </li>
+                
                 {/* Logout Button */}
                 <li>
                   <button
                     onClick={handleLogout}
-                    className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-300 transform hover:scale-105"
+                    className="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-red-500/25"
                   >
                     Logout
                   </button>
@@ -113,7 +129,10 @@ export default function Navbar() {
               </>
             ) : (
               <li>
-                <Link to="/login" className="px-4 py-2 text-sm font-semibold text-white bg-purple-500 hover:bg-purple-600 rounded-lg transition">
+                <Link 
+                  to="/login" 
+                  className="px-6 py-2 text-sm font-semibold text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-purple-500/25"
+                >
                   Login / Signup
                 </Link>
               </li>
@@ -123,23 +142,47 @@ export default function Navbar() {
           {/* Icons */}
           <div className="flex items-center space-x-4">
             {/* Search */}
-            <button onClick={toggleSearch} className="p-2 text-gray-300 hover:text-purple-300 transition">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35A7.5 7.5 0 1010.5 3a7.5 7.5 0 016.15 13.65z" /></svg>
+            <button 
+              onClick={toggleSearch} 
+              className="p-2 text-gray-300 hover:text-purple-300 transition-colors duration-300 hover:bg-white/5 rounded-lg"
+              aria-label="Search"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35A7.5 7.5 0 1010.5 3a7.5 7.5 0 016.15 13.65z" />
+              </svg>
             </button>
 
-            {/* Cart */}
-            <Link to="/cart" className="relative p-2 text-gray-300 hover:text-purple-300 transition">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2 9m5-9v9m4-9v9m5-9l2 9" /></svg>
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-purple-500 text-white rounded-full text-xs w-4 h-4 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
+            {/* Cart - Only show if user is logged in */}
+            {user && (
+              <Link 
+                to="/cart" 
+                className="relative p-2 text-gray-300 hover:text-purple-300 transition-colors duration-300 hover:bg-white/5 rounded-lg"
+                aria-label={`Shopping cart with ${cartCount} items`}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-2 9m5-9v9m4-9v9m5-9l2 9" />
+                </svg>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold animate-pulse">
+                    {cartCount > 99 ? '99+' : cartCount}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
-            <button onClick={toggleMenu} className="md:hidden p-2 text-gray-300 hover:text-purple-300">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}>
+            <button 
+              onClick={toggleMenu} 
+              className="md:hidden p-2 text-gray-300 hover:text-purple-300 transition-all duration-300 hover:bg-white/5 rounded-lg"
+              aria-label="Toggle mobile menu"
+            >
+              <svg 
+                className="w-5 h-5 transition-transform duration-300" 
+                fill="none" 
+                stroke="currentColor" 
+                style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+                viewBox="0 0 24 24"
+              >
                 {isOpen
                   ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -151,80 +194,111 @@ export default function Navbar() {
 
         {/* Search Bar */}
         {searchOpen && (
-          <div className="absolute top-full left-0 right-0 bg-black/90 backdrop-blur-lg border-b border-purple-400/20 z-50">
+          <div className="absolute top-full left-0 right-0 bg-black/90 backdrop-blur-lg border-b border-purple-400/20 z-50 animate-in slide-in-from-top-2 duration-300">
             <div className="max-w-7xl mx-auto px-6 py-4">
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-purple-400/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-400/60"
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search events, members, products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-3 pl-12 bg-white/10 border border-purple-400/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-400/60 focus:ring-2 focus:ring-purple-400/20 transition-all duration-300"
+                  autoFocus
+                />
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35A7.5 7.5 0 1010.5 3a7.5 7.5 0 016.15 13.65z" />
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
         )}
       </nav>
 
       {/* Mobile Nav */}
-      <div className={`md:hidden fixed top-0 left-0 w-72 h-full z-40 backdrop-blur-xl bg-black/80 border-r border-purple-400/20 transform transition-transform duration-300 ${
+      <div className={`md:hidden fixed top-0 left-0 w-80 h-full z-40 backdrop-blur-xl bg-black/85 border-r border-purple-400/20 transform transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "-translate-x-full"
       }`}>
-        <div className="p-6 pt-20 space-y-4">
+        <div className="p-6 pt-20 space-y-4 h-full overflow-y-auto">
           {/* User Info in Mobile */}
           {user && (
-            <div className="flex items-center space-x-3 p-4 bg-purple-400/10 rounded-lg border border-purple-400/20 mb-4">
+            <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-lg border border-purple-400/20 mb-6">
               <img
                 src={user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.displayName || user.email)}&background=7c3aed&color=fff`}
                 alt="Profile"
-                className="w-10 h-10 rounded-full border-2 border-purple-400/50"
+                className="w-12 h-12 rounded-full border-2 border-purple-400/50"
               />
-              <div>
-                <p className="text-white text-sm font-medium">
+              <div className="flex-1 min-w-0">
+                <p className="text-white text-sm font-medium truncate">
                   {user.displayName || 'User'}
                 </p>
-                <p className="text-gray-400 text-xs">
+                <p className="text-gray-400 text-xs truncate">
                   {user.email}
                 </p>
               </div>
             </div>
           )}
 
-          {navLinks.map(({ to, label, protected: isProtected }) => (
-            <NavLink
-              key={to}
-              to={to}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `block px-4 py-3 text-sm font-medium rounded-lg ${
-                  isActive
-                    ? "text-purple-400 bg-purple-400/10 border-l-2 border-purple-400"
-                    : "text-gray-300 hover:text-purple-300 hover:bg-white/5"
-                }`
-              }
-            >
-              {label}
-            </NavLink>
-          ))}
+          {/* Navigation Links */}
+          <div className="space-y-2">
+            {navLinks.map(({ to, label, protected: isProtected }) => {
+              // Hide protected routes if user is not logged in
+              if (isProtected && !user) return null;
+              
+              return (
+                <NavLink
+                  key={to}
+                  to={to}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    `block px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                      isActive
+                        ? "text-purple-400 bg-purple-400/10 border-l-4 border-purple-400 shadow-lg"
+                        : "text-gray-300 hover:text-purple-300 hover:bg-white/5 hover:border-l-4 hover:border-purple-400/50"
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              );
+            })}
+          </div>
           
           {/* Auth Buttons */}
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="block w-full px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition mt-4"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              onClick={() => setIsOpen(false)}
-              className="block px-4 py-3 text-sm font-semibold text-white bg-purple-500 hover:bg-purple-600 rounded-lg transition"
-            >
-              Login / Signup
-            </Link>
-          )}
+          <div className="pt-6 border-t border-purple-400/20">
+            {loading ? (
+              <div className="flex items-center justify-center py-4">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-400"></div>
+                <span className="ml-2 text-gray-300 text-sm">Loading...</span>
+              </div>
+            ) : user ? (
+              <button
+                onClick={handleLogout}
+                className="block w-full px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg transition-all duration-300 shadow-lg hover:shadow-red-500/25"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                onClick={() => setIsOpen(false)}
+                className="block w-full px-4 py-3 text-sm font-semibold text-center text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-lg transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+              >
+                Login / Signup
+              </Link>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      {isOpen && (
+        <div 
+          className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
     </>
   );
 }

@@ -1,7 +1,7 @@
-import React, { Suspense, useState, useEffect, useContext } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
-import { AuthProvider, AuthContext } from "./context/AuthContext"; // ✅ new
+import { AuthProvider, useAuth } from "./context/AuthContext"; // Fixed import
 import Navbar from "./components/Navbar.jsx";
 import StarBackground from "./components/StarBackground.jsx";
 import BackgroundWrapper from "./components/Background.jsx";
@@ -19,7 +19,7 @@ const Userprofile = React.lazy(() => import("./pages/Userprofile.jsx"));
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading } = useAuth(); // Use the useAuth hook instead of useContext
   const location = useLocation();
 
   if (loading) {
@@ -154,7 +154,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <AuthProvider> {/* ✅ Wrap app with Firebase Auth Context */}
+      <AuthProvider>
         <Router>
           <AppContent showIntro={showIntro} handleIntroComplete={handleIntroComplete} />
         </Router>
