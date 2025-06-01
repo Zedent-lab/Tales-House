@@ -7,10 +7,10 @@ const Userprofile = () => {
 
   // Mock data - replace with actual data from your backend
   const userData = {
-    name: "John Doe",
-    email: "john.doe@email.com",
-    phone: "+1 (555) 123-4567",
-    memberSince: "January 2024",
+    name: "xxxxx",
+    email: "xxxxxx",
+    phone: "xxxxxx",
+    memberSince: "xxxxxx",
     avatar: "/api/placeholder/120/120"
   };
 

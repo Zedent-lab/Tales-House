@@ -1,0 +1,56 @@
+[debug] [2025-06-01T17:15:09.753Z] ----------------------------------------------------------------------
+[debug] [2025-06-01T17:15:09.754Z] Command:       /opt/homebrew/Cellar/node/23.7.0/bin/node /opt/homebrew/bin/firebase init hosting
+[debug] [2025-06-01T17:15:09.755Z] CLI Version:   14.5.1
+[debug] [2025-06-01T17:15:09.755Z] Platform:      darwin
+[debug] [2025-06-01T17:15:09.755Z] Node Version:  v23.7.0
+[debug] [2025-06-01T17:15:09.755Z] Time:          Sun Jun 01 2025 20:15:09 GMT+0300 (East Africa Time)
+[debug] [2025-06-01T17:15:09.755Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-06-01T17:15:09.836Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-06-01T17:15:09.836Z] > authorizing via signed-in user (clay.gitobu@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/clay/Project_x/tales-house-website
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2025-06-01T17:15:09.838Z] Using project from CLI flag: taleshouse-dbcc6
+[debug] [2025-06-01T17:15:09.838Z] Checked if tokens are valid: false, expires at: 1748797693057
+[debug] [2025-06-01T17:15:09.838Z] Checked if tokens are valid: false, expires at: 1748797693057
+[debug] [2025-06-01T17:15:09.838Z] > refreshing access token with scopes: []
+[debug] [2025-06-01T17:15:09.839Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-06-01T17:15:09.839Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-06-01T17:15:10.196Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-06-01T17:15:10.196Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-06-01T17:15:10.207Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/taleshouse-dbcc6 [none]
+[debug] [2025-06-01T17:15:10.916Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/taleshouse-dbcc6 200
+[debug] [2025-06-01T17:15:10.916Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/taleshouse-dbcc6 {"projectId":"taleshouse-dbcc6","projectNumber":"412974008717","displayName":"TalesHouse","name":"projects/taleshouse-dbcc6","resources":{"hostingSite":"taleshouse-dbcc6"},"state":"ACTIVE","etag":"1_1e42cd82-3e83-4bec-a192-b709294a6283"}
+[info] i  Using project taleshouse-dbcc6 (TalesHouse) 
+[info] 
+=== Hosting Setup
+[debug] [2025-06-01T17:15:10.926Z] Checked if tokens are valid: true, expires at: 1748801709196
+[debug] [2025-06-01T17:15:10.926Z] Checked if tokens are valid: true, expires at: 1748801709196
+[debug] [2025-06-01T17:15:10.927Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/taleshouse-dbcc6 [none]
+[debug] [2025-06-01T17:15:11.218Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/taleshouse-dbcc6 200
+[debug] [2025-06-01T17:15:11.219Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/taleshouse-dbcc6 {"projectId":"taleshouse-dbcc6","projectNumber":"412974008717","displayName":"TalesHouse","name":"projects/taleshouse-dbcc6","resources":{"hostingSite":"taleshouse-dbcc6"},"state":"ACTIVE","etag":"1_1e42cd82-3e83-4bec-a192-b709294a6283"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

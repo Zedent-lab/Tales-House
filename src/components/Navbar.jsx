@@ -62,13 +62,15 @@ export default function Navbar() {
                 alt="Tales House Logo" 
                 className="w-full h-full object-contain filter brightness-110 group-hover:brightness-125 transition-all duration-300"
               />
-              <div className="absolute inset-0 bg-purple-400/20 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              {/* Removed green glow effect near logo */}
             </div>
             
             {/* Brand Text */}
             <div className="relative">
               <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text">
                 Tale House
+            
+
               </span>
               {/* Subtle geometric accent */}
               <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/40 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>

@@ -8,7 +8,7 @@ const IntroPage = ({ onComplete }) => {
   const [logoLoaded, setLogoLoaded] = useState(false);
   
   const targetText = 'TALES HOUSE';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234?56789';
 
   useEffect(() => {
     let iteration = 0;
@@ -75,7 +75,7 @@ const IntroPage = ({ onComplete }) => {
             <img 
               src="https://i.imgur.com/XkDQqzr.png" 
               alt="Tales House Logo"
-              className="w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto opacity-95 object-contain"
+              className="w-42 h-42 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto opacity-95 object-contain"
               onLoad={() => setLogoLoaded(true)}
               onError={(e) => {
                 e.target.style.display = 'none';
