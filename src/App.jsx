@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar.jsx";
 import BackgroundWrapper from "./components/Background.jsx";
@@ -12,19 +12,20 @@ const Cart = React.lazy(() => import("./pages/Cart.jsx"));
 const Contact = React.lazy(() => import("./pages/Contact.jsx"));
 const Login = React.lazy(() => import("./pages/Login.jsx"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail.jsx"));
-const TalesHouseLanding = React.lazy(() => import("./pages/Home.jsx"));
 const Events = React.lazy(() => import("./pages/Events.jsx"));
 const Userprofile = React.lazy(() => import("./pages/Userprofile.jsx"));
 
 // Main App Content Component
 const AppContent = ({ showIntro, handleIntroComplete }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Handle the transition from intro to main app
   const handleTransition = () => {
     setIsTransitioning(true);
-    handleIntroComplete(); // Immediate transition
+    handleIntroComplete();
+    navigate("/");  // Navigate to Home page after intro completes
   };
 
   return (

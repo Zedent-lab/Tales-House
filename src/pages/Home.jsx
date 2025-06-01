@@ -43,30 +43,30 @@ const TalesHouseLanding = () => {
   const events = [
     {
       id: 1,
-      title: "Spring Collection Launch",
-      date: "June 15, 2025",
-      location: "New York Fashion Week",
-      image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&h=600&fit=crop&q=80",
-      description: "Unveiling our latest spring collection with innovative designs that blend tradition with modernity."
+      title: "xxxxxxx",
+      date: "xxxxxxx",
+      location: "Somewhere in Kenya",
+      image: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?w=800&h=600&fit=crop&q=80",
+      description: "xxxxxxxx"
     },
     {
       id: 2,
-      title: "Tales House Pop-Up Store",
-      date: "June 22, 2025", 
-      location: "Los Angeles, CA",
+      title: "xxxxxxx",
+      date: "xxxxxxx",
+      location: "Somewhere in Kenya",
       image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop&q=80",
-      description: "Experience our brand in person at our exclusive pop-up location in the heart of Los Angeles."
+      description: "xxxxxxxx"
     },
     {
       id: 3,
-      title: "Designer Showcase",
-      date: "July 5, 2025",
-      location: "Milan Fashion Week",
+      title: "xxxxxxx",
+      date: "xxxxxxx",
+      location: "Somewhere in Kenya",
       image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800&h=600&fit=crop&q=80",
-      description: "Join us for an intimate showcase featuring emerging designers and exclusive pieces."
+      description: "xxxxxxxx"
     }
   ];
-
+  
   const smoothScroll = (targetId) => {
     const element = document.getElementById(targetId);
     if (element) {
