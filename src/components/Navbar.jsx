@@ -68,7 +68,7 @@ export default function Navbar() {
             {/* Brand Text */}
             <div className="relative">
               <span className="text-2xl font-bold text-transparent bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text">
-                Tales House
+                Tale House
               </span>
               {/* Subtle geometric accent */}
               <div className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-400/40 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>

@@ -7,52 +7,60 @@ const Background = ({ theme }) => {
   const starsRef = useRef([]);
   const isAnimatingRef = useRef(true);
 
-  // Optimized Star class with better performance
+  // Enhanced Star class with more visible twinkling
   const Star = useMemo(() => {
     return class {
       constructor(width, height) {
         this.reset(width, height);
         
-        // Performance optimization: pre-calculate static values
+        // Enhanced star categories with better visibility
         const magnitude = Math.random();
-        if (magnitude < 0.05) {
-          // Rare bright stars (5%)
-          this.size = 1.2 + Math.random() * 0.8;
-          this.brightness = 0.8 + Math.random() * 0.2;
-          this.twinkleIntensity = 0.9;
-          this.glowRadius = 4;
+        if (magnitude < 0.08) {
+          // Bright stars (8%) - more noticeable
+          this.size = 1.5 + Math.random() * 1.0;
+          this.brightness = 0.9 + Math.random() * 0.1;
+          this.twinkleIntensity = 1.0;
+          this.glowRadius = 6;
           this.isBright = true;
           this.hasSparkle = true;
-        } else if (magnitude < 0.15) {
-          // Medium stars (10%)
-          this.size = 0.8 + Math.random() * 0.4;
-          this.brightness = 0.6 + Math.random() * 0.2;
+          this.minOpacity = 0.4; // Never go too dim
+        } else if (magnitude < 0.2) {
+          // Medium-bright stars (12%)
+          this.size = 1.0 + Math.random() * 0.5;
+          this.brightness = 0.7 + Math.random() * 0.2;
+          this.twinkleIntensity = 0.8;
+          this.glowRadius = 3;
+          this.isBright = false;
+          this.hasSparkle = true;
+          this.minOpacity = 0.3;
+        } else if (magnitude < 0.45) {
+          // Medium stars (25%)
+          this.size = 0.6 + Math.random() * 0.4;
+          this.brightness = 0.5 + Math.random() * 0.3;
           this.twinkleIntensity = 0.7;
-          this.glowRadius = 2.5;
+          this.glowRadius = 2;
           this.isBright = false;
           this.hasSparkle = false;
-        } else if (magnitude < 0.4) {
-          // Regular stars (25%)
-          this.size = 0.5 + Math.random() * 0.3;
-          this.brightness = 0.4 + Math.random() * 0.3;
-          this.twinkleIntensity = 0.5;
-          this.glowRadius = 1.5;
-          this.isBright = false;
-          this.hasSparkle = false;
+          this.minOpacity = 0.2;
         } else {
-          // Dim stars (60%)
-          this.size = 0.2 + Math.random() * 0.3;
-          this.brightness = 0.2 + Math.random() * 0.3;
-          this.twinkleIntensity = 0.3;
+          // Dim stars (55%)
+          this.size = 0.3 + Math.random() * 0.3;
+          this.brightness = 0.3 + Math.random() * 0.4;
+          this.twinkleIntensity = 0.6;
           this.glowRadius = 1;
           this.isBright = false;
           this.hasSparkle = false;
+          this.minOpacity = 0.15;
         }
         
-        // Optimized twinkle speeds
-        this.twinkleSpeed = 0.02 + Math.random() * 0.04;
+        // Faster, more varied twinkle speeds
+        this.twinkleSpeed = 0.04 + Math.random() * 0.08;
         this.twinklePhase = Math.random() * Math.PI * 2;
         this.baseOpacity = this.brightness;
+        
+        // Secondary twinkle for more complex effect
+        this.secondaryTwinkleSpeed = 0.02 + Math.random() * 0.03;
+        this.secondaryPhase = Math.random() * Math.PI * 2;
       }
       
       reset(width, height) {
@@ -62,49 +70,72 @@ const Background = ({ theme }) => {
       
       update() {
         this.twinklePhase += this.twinkleSpeed;
+        this.secondaryPhase += this.secondaryTwinkleSpeed;
+        
         if (this.twinklePhase > Math.PI * 2) {
           this.twinklePhase -= Math.PI * 2;
+        }
+        if (this.secondaryPhase > Math.PI * 2) {
+          this.secondaryPhase -= Math.PI * 2;
         }
       }
       
       draw(ctx, theme) {
-        // Simplified twinkling calculation
-        const twinkle = 0.3 + 0.7 * (Math.sin(this.twinklePhase) * 0.5 + 0.5);
-        const opacity = this.baseOpacity * twinkle;
+        // Enhanced twinkling calculation with two sine waves
+        const primaryTwinkle = Math.sin(this.twinklePhase) * 0.5 + 0.5;
+        const secondaryTwinkle = Math.sin(this.secondaryPhase) * 0.3 + 0.7;
         
-        if (opacity < 0.1) return; // Skip very dim stars
+        // Combine twinkles for more dynamic effect
+        const combinedTwinkle = (primaryTwinkle * this.twinkleIntensity + secondaryTwinkle) / (1 + this.twinkleIntensity);
+        
+        // Ensure minimum visibility
+        const opacity = Math.max(this.minOpacity, this.baseOpacity * combinedTwinkle);
+        
+        if (opacity < 0.1) return;
         
         ctx.save();
         ctx.globalAlpha = opacity;
         
-        // Set color based on theme
-        const starColor = theme === 'dark' ? '#ffffff' : '#1e293b';
+        // Always use white stars for dark theme visibility
+        const starColor = '#ffffff';
         
-        // Main star body
-        if (this.isBright) {
+        // Enhanced glow effect
+        if (this.glowRadius > 1) {
           ctx.shadowColor = starColor;
-          ctx.shadowBlur = this.glowRadius * twinkle;
+          ctx.shadowBlur = this.glowRadius * combinedTwinkle;
         }
         
         ctx.fillStyle = starColor;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, this.size * (0.8 + 0.2 * combinedTwinkle), 0, Math.PI * 2);
         ctx.fill();
         
-        // Sparkle effect for bright stars
-        if (this.hasSparkle && twinkle > 0.8) {
+        // Enhanced sparkle effect
+        if (this.hasSparkle) {
           ctx.shadowBlur = 0;
           ctx.strokeStyle = starColor;
-          ctx.lineWidth = 0.5;
-          ctx.globalAlpha = opacity * 0.6;
+          ctx.lineWidth = 0.8;
+          ctx.globalAlpha = opacity * (0.3 + 0.5 * combinedTwinkle);
           
-          const sparkleLength = this.size * 2;
+          const sparkleLength = this.size * (1.5 + combinedTwinkle);
           
           ctx.beginPath();
+          // Vertical sparkle
           ctx.moveTo(this.x, this.y - sparkleLength);
           ctx.lineTo(this.x, this.y + sparkleLength);
+          // Horizontal sparkle
           ctx.moveTo(this.x - sparkleLength, this.y);
           ctx.lineTo(this.x + sparkleLength, this.y);
+          
+          // Diagonal sparkles for bright stars
+          if (this.isBright && combinedTwinkle > 0.7) {
+            const diagLength = sparkleLength * 0.7;
+            ctx.moveTo(this.x - diagLength, this.y - diagLength);
+            ctx.lineTo(this.x + diagLength, this.y + diagLength);
+            ctx.moveTo(this.x + diagLength, this.y - diagLength);
+            ctx.lineTo(this.x - diagLength, this.y + diagLength);
+          }
+          
           ctx.stroke();
         }
         
@@ -115,7 +146,7 @@ const Background = ({ theme }) => {
 
   // Optimized initialization
   const initStars = useCallback((width, height) => {
-    const density = Math.min(width * height / 8000, 150); // Reduced density for better performance
+    const density = Math.min(width * height / 7000, 180); // Slightly more stars
     const starCount = Math.floor(density);
     
     starsRef.current = [];
@@ -124,7 +155,7 @@ const Background = ({ theme }) => {
     }
   }, [Star]);
 
-  // Animation loop with performance optimizations
+  // Animation loop
   const animate = useCallback(() => {
     if (!isAnimatingRef.current) return;
     
@@ -164,15 +195,13 @@ const Background = ({ theme }) => {
     });
     
     // Adjust star count based on new screen size
-    const targetCount = Math.floor(Math.min(width * height / 8000, 150));
+    const targetCount = Math.floor(Math.min(width * height / 7000, 180));
     
     if (starsRef.current.length < targetCount) {
-      // Add more stars
       while (starsRef.current.length < targetCount) {
         starsRef.current.push(new Star(width, height));
       }
     } else if (starsRef.current.length > targetCount) {
-      // Remove excess stars
       starsRef.current.splice(targetCount);
     }
   }, [Star]);
@@ -207,7 +236,7 @@ const Background = ({ theme }) => {
     };
   }, [initStars, animate, handleResize]);
 
-  // Pause animation when not visible (performance optimization)
+  // Pause animation when not visible
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -233,8 +262,7 @@ const Background = ({ theme }) => {
       ref={canvasRef}
       className="fixed top-0 left-0 w-full h-full pointer-events-none z-0"
       style={{ 
-        opacity: 0.8,
-        mixBlendMode: theme === 'dark' ? 'screen' : 'multiply'
+        opacity: 0.9 // Increased opacity for better visibility
       }}
       aria-hidden="true"
     />
