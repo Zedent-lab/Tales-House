@@ -228,93 +228,112 @@ const TalesHouseLanding = () => {
         </div>
       </section>
 
-      {/* Dynamic Barcode Section */}
-      <section className="relative py-32">
-        <div className={`max-w-2xl mx-auto px-6 text-center transition-all duration-1000 ${isVisible.events ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="inline-block p-12 border border-white/10 bg-gradient-to-br from-white/[0.02] to-white/[0.05] backdrop-blur-sm rounded-2xl">
-            
-            {/* Dynamic Animated Barcode */}
-            <div className="w-80 h-24 mx-auto mb-8 bg-black/90 rounded-lg p-4 flex items-center justify-center overflow-hidden border border-purple-400/20">
-              <div className="flex items-center space-x-[2px] h-full">
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const heights = [20, 35, 45, 25, 55, 30, 40, 50, 28, 38];
-                  const baseHeight = heights[i % heights.length];
-                  return (
-                    <div
-                      key={i}
-                      className="bg-gradient-to-t from-purple-400 to-purple-200 rounded-sm transition-all duration-1000 ease-in-out"
-                      style={{
-                        width: '3px',
-                        height: `${baseHeight + Math.sin((Date.now() / 1000 + i) * 0.5) * 10}px`,
-                        animationDelay: `${i * 50}ms`,
-                        opacity: 0.8 + Math.sin((Date.now() / 1000 + i) * 0.3) * 0.2
-                      }}
-                    />
-                  );
-                })}
-              </div>
-              
-              {/* Scanning line effect */}
-              <div 
-                className="absolute w-1 h-full bg-gradient-to-b from-transparent via-purple-300/60 to-transparent"
+      {/* Dynamic Barcode Section – now mobile optimised */}
+<section className="relative py-20 sm:py-28 md:py-32">
+  <div
+    className={`max-w-lg sm:max-w-xl md:max-w-2xl mx-auto px-4 sm:px-6 text-center
+      transition-all duration-1000
+      ${isVisible.events ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+  >
+    {/* Glassy frame */}
+    <div className="inline-block px-6 py-10 sm:p-12 border border-white/10
+      bg-gradient-to-br from-white/[0.02] to-white/[0.05] backdrop-blur-sm
+      rounded-xl sm:rounded-2xl">
+      
+      {/* ── Animated Barcode ─────────────────────────── */}
+      <div className="relative mx-auto mb-8
+        w-64 h-20 sm:w-72 sm:h-24 md:w-80 md:h-24
+        flex items-center justify-center overflow-hidden
+        rounded-lg border border-purple-400/20 bg-black/90 p-3">
+        
+        <div className="flex items-center space-x-[1.5px] sm:space-x-[2px] h-full">
+          {Array.from({ length: 60 }).map((_, i) => {
+            const heights = [20, 35, 45, 25, 55, 30, 40, 50, 28, 38];
+            const base = heights[i % heights.length];
+            return (
+              <div
+                key={i}
+                className="bg-gradient-to-t from-purple-400 to-purple-200 rounded-sm
+                  transition-all duration-1000 ease-in-out"
                 style={{
-                  animation: 'scan 3s ease-in-out infinite',
-                  left: '50%',
-                  transform: 'translateX(-50%)'
+                  width: '2px',
+                  height: `${base + Math.sin((Date.now() / 1000 + i) * 0.5) * 10}px`,
+                  animationDelay: `${i * 50}ms`,
+                  opacity: 0.8 + Math.sin((Date.now() / 1000 + i) * 0.3) * 0.2
                 }}
               />
-            </div>
-
-            {/* Holographic ID Card */}
-            <div className="w-64 h-40 mx-auto mb-8 bg-gradient-to-br from-black/80 to-purple-900/20 rounded-xl border border-purple-400/30 backdrop-blur-sm overflow-hidden relative">
-              {/* Holographic effect overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-300/10 to-transparent transform -skew-x-12 animate-pulse"></div>
-              
-              <div className="p-6 relative z-10">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                  </div>
-                  <div className="text-xs font-mono text-purple-300/60">ID: TH-2025</div>
-                </div>
-                
-                <div className="space-y-2">
-                  <div className="h-2 bg-gradient-to-r from-purple-400/60 to-transparent rounded"></div>
-                  <div className="h-2 bg-gradient-to-r from-purple-400/40 to-transparent rounded w-3/4"></div>
-                  <div className="h-2 bg-gradient-to-r from-purple-400/50 to-transparent rounded w-1/2"></div>
-                </div>
-                
-                <div className="mt-4 text-xs font-mono text-purple-300/80">
-                  VERIFIED MEMBER
-                </div>
-              </div>
-              
-              {/* Corner accent */}
-              <div className="absolute bottom-2 right-2 w-8 h-8 border-r-2 border-b-2 border-purple-400/30"></div>
-            </div>
-            
-            <p 
-              className="text-purple-300/80 text-sm font-light tracking-[0.3em] mb-2"
-              style={{ fontFamily: '"JetBrains Mono", "SF Mono", monospace' }}
-            >
-              EXCLUSIVE ACCESS
-            </p>
-            <p 
-              className="text-white/40 text-xs font-light tracking-[0.2em]"
-              style={{ fontFamily: '"JetBrains Mono", "SF Mono", monospace' }}
-            >
-              TH-2025-COLLECTION
-            </p>
-          </div>
+            );
+          })}
         </div>
+
+        {/* scanning line */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 w-[2px] h-full
+            bg-gradient-to-b from-transparent via-purple-300/60 to-transparent"
+          style={{ animation: 'scan 3s ease-in-out infinite' }}
+        />
+      </div>
+
+      {/* ── Holographic ID Card ───────────────────────── */}
+      <div className="relative mx-auto mb-8 w-56 h-36 sm:w-60 sm:h-40
+        rounded-lg sm:rounded-xl border border-purple-400/30
+        bg-gradient-to-br from-black/80 to-purple-900/20 backdrop-blur-sm overflow-hidden">
         
-        <style jsx>{`
-          @keyframes scan {
-            0%, 100% { transform: translateX(-200px); opacity: 0; }
-            50% { transform: translateX(200px); opacity: 1; }
-          }
-        `}</style>
-      </section>
+        {/* Holo overlay */}
+        <div className="absolute inset-0 -skew-x-12
+          bg-gradient-to-r from-transparent via-purple-300/10 to-transparent animate-pulse" />
+        
+        <div className="relative z-10 p-5 sm:p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-7 h-7 sm:w-8 sm:h-8
+              bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
+              <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+            </div>
+            <span className="text-[9px] sm:text-xs font-mono text-purple-300/60">
+              ID: TH-2025
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            <div className="h-1.5 bg-gradient-to-r from-purple-400/60 to-transparent rounded" />
+            <div className="h-1.5 w-3/4 bg-gradient-to-r from-purple-400/40 to-transparent rounded" />
+            <div className="h-1.5 w-1/2 bg-gradient-to-r from-purple-400/50 to-transparent rounded" />
+          </div>
+
+          <p className="mt-3 text-[10px] sm:text-xs font-mono text-purple-300/80">
+            VERIFIED&nbsp;MEMBER
+          </p>
+        </div>
+
+        {/* corner accent */}
+        <div className="absolute bottom-1.5 right-1.5
+          w-6 h-6 sm:w-7 sm:h-7 border-r-2 border-b-2 border-purple-400/30" />
+      </div>
+
+      {/* ── Labels ────────────────────────────────────── */}
+      <p
+        className="mb-1.5 text-[11px] sm:text-sm font-light tracking-[0.3em] text-purple-300/80"
+        style={{ fontFamily: '"JetBrains Mono", "SF Mono", monospace' }}
+      >
+        EXCLUSIVE&nbsp;ACCESS
+      </p>
+      <p
+        className="text-[10px] sm:text-xs font-light tracking-[0.2em] text-white/40"
+        style={{ fontFamily: '"JetBrains Mono", "SF Mono", monospace' }}
+      >
+        TH-2025-COLLECTION
+      </p>
+    </div>
+  </div>
+
+  {/* local keyframes */}
+  <style jsx>{`
+    @keyframes scan {
+      0%,100% { transform: translateX(-200px); opacity: 0; }
+      50%      { transform: translateX(200px);  opacity: 1; }
+    }
+  `}</style>
+</section>
 
       {/* Contact Section */}
       <section id="contact" className="relative py-32">
