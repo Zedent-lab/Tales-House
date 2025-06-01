@@ -127,7 +127,7 @@ const TalesHouseLanding = () => {
           
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-8 transition-all duration-1000 delay-600 ${isVisible.home ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <a 
-              href="https://www.instagram.com/talehousee/" 
+              href="https://www.instagram.com/officialtalehouse/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group flex items-center space-x-3 px-8 py-4 border border-white/20 hover:border-purple-400/50 hover:bg-purple-400/5 transition-all duration-500 hover:scale-105"

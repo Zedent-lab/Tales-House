@@ -5,83 +5,83 @@ const Members = () => {
   const members = [
     {
       id: 1,
-      name: "Alex Rivera",
+      name: "xxxxx",
       photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-      description: "Creative storyteller and content creator specializing in mystery and thriller narratives. Passionate about bringing dark tales to life through visual media.",
-      instagram: "@alexrivera_tales",
-      tiktok: "@alexstories"
+      description: "xxxxxxxxxxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxx"
     },
     {
       id: 2,
-      name: "Maya Chen",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
-      description: "Horror enthusiast and filmmaker with a knack for psychological thrillers. Creates immersive experiences that blur the line between reality and fiction.",
-      instagram: "@mayachen_horror",
-      tiktok: "@mayascreams"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 3,
-      name: "Jordan Blake",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
-      description: "Paranormal investigator and storyteller who brings real-life ghost stories and supernatural encounters to the digital realm.",
-      instagram: "@jordanblake_paranormal",
-      tiktok: "@ghosthunter_jordan"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 4,
-      name: "Sophia Martinez",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
-      description: "Master of suspense and psychological drama. Specializes in creating atmospheric content that keeps audiences on the edge of their seats.",
-      instagram: "@sophia_suspense",
-      tiktok: "@sophiascares"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 5,
-      name: "Ethan Cross",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-      description: "Dark fantasy writer and visual artist who combines storytelling with stunning cinematography to create otherworldly experiences.",
-      instagram: "@ethancross_fantasy",
-      tiktok: "@ethandarkarts"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 6,
-      name: "Luna Park",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
-      description: "Folklore researcher and storyteller who brings ancient myths and legends into the modern age through captivating digital narratives.",
-      instagram: "@lunapark_folklore",
-      tiktok: "@ancienttales_luna"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 7,
-      name: "Marcus Stone",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&h=400&fit=crop&crop=face",
-      description: "True crime enthusiast and investigative storyteller who delves deep into mysterious cases and unsolved puzzles.",
-      instagram: "@marcusstone_crime",
-      tiktok: "@truecrime_marcus"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 8,
-      name: "Isabella Rose",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=400&fit=crop&crop=face",
-      description: "Gothic romance writer and aesthetic curator who weaves tales of love, loss, and supernatural encounters in Victorian-inspired settings.",
-      instagram: "@isabella_gothic",
-      tiktok: "@gothicrose_tales"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 9,
-      name: "Kai Thompson",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&h=400&fit=crop&crop=face",
-      description: "Urban legend collector and digital storyteller who explores modern myths and contemporary folklore in city environments.",
-      instagram: "@kai_urbanlegends",
-      tiktok: "@cityghosts_kai"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     },
     {
       id: 10,
-      name: "Raven Mitchell",
+      name: "xxxxxxxxxxxxx",
       photo: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop&crop=face",
-      description: "Witch aesthetic enthusiast and occult storyteller who creates content around modern witchcraft, tarot, and mystical practices.",
-      instagram: "@raven_witchtales",
-      tiktok: "@modernwitch_raven"
+      description: "xxxxxxxxxxxxx",
+      instagram: "xxxxxxxxxxxxx",
+      tiktok: "xxxxxxxxxxxxx"
     }
   ];
 
