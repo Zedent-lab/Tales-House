@@ -1,7 +1,7 @@
-import React, { Suspense, useState, useEffect } from "react";
-import { HashRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import React, { Suspense, useState, useEffect, useContext } from "react";
+import { HashRouter as Router, Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
-import { AuthProvider } from "./context/AuthContext"; // ✅ new
+import { AuthProvider, AuthContext } from "./context/AuthContext"; // ✅ new
 import Navbar from "./components/Navbar.jsx";
 import StarBackground from "./components/StarBackground.jsx";
 import BackgroundWrapper from "./components/Background.jsx";
@@ -16,6 +16,29 @@ const Login = React.lazy(() => import("./pages/Login.jsx"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail.jsx"));
 const Events = React.lazy(() => import("./pages/Events.jsx"));
 const Userprofile = React.lazy(() => import("./pages/Userprofile.jsx"));
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useContext(AuthContext);
+  const location = useLocation();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400 mx-auto mb-4"></div>
+          <p className="text-gray-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+};
 
 const AppContent = ({ showIntro, handleIntroComplete }) => {
   const location = useLocation();
@@ -55,17 +78,34 @@ const AppContent = ({ showIntro, handleIntroComplete }) => {
         <Navbar />
         <BackgroundWrapper>
           <main className="pt-20 min-h-screen dark:text-gray-100 text-gray-900 transition-colors duration-300">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={
+              <div className="flex items-center justify-center min-h-screen">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400 mx-auto mb-4"></div>
+                  <p className="text-gray-400">Loading...</p>
+                </div>
+              </div>
+            }>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/members" element={<Members />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/shop" element={<Shop />} />
-                <Route path="/cart" element={<Cart />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/product/:id" element={<ProductDetail />} />
-                <Route path="/userprofile" element={<Userprofile />} />
+                
+                {/* Protected Routes */}
+                <Route path="/cart" element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                } />
+                <Route path="/userprofile" element={
+                  <ProtectedRoute>
+                    <Userprofile />
+                  </ProtectedRoute>
+                } />
               </Routes>
             </Suspense>
           </main>
