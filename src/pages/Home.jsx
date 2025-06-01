@@ -115,14 +115,14 @@ const TalesHouseLanding = () => {
               backgroundClip: 'text'
             }}
           >
-            TALES HOUSE
+            TALE HOUSE
           </h1>
           
           <p 
             className={`text-lg md:text-xl text-white/60 font-light tracking-[0.4em] mb-16 transition-all duration-1000 delay-400 ${isVisible.home ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             style={{ fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif' }}
           >
-            WHERE STORIES COME TO LIFE
+            Like a flower blooming in its own time, we unfold our true selves, embracing growth and reaching for the light, petal by petal, with quiet strength and beauty.
           </p>
           
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-8 transition-all duration-1000 delay-600 ${isVisible.home ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -394,18 +394,18 @@ const TalesHouseLanding = () => {
                 className="text-lg font-light tracking-[0.2em] text-white/60"
                 style={{ fontFamily: '"Inter", "SF Pro Display", system-ui, sans-serif' }}
               >
-                TALES HOUSE
+                TALE HOUSE
               </span>
             </div>
             
             <p className="text-white/40 text-sm font-light">
-              Crafting stories through fashion since 2025
+            Like a flower blooming in its own time, we unfold our true selves, embracing growth and reaching for the light, petal by petal, with quiet strength and beauty.
             </p>
           </div>
           
           <div className="text-center pt-8 border-t border-white/5">
             <p className="text-white/40 text-sm font-light">
-              © 2025 Tales House. All rights reserved.
+              © 2025 Tale House. All rights reserved.
             </p>
           </div>
         </div>
