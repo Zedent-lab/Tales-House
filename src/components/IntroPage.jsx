@@ -7,8 +7,8 @@ const IntroPage = ({ onComplete }) => {
   const [textCompleted, setTextCompleted] = useState(false);
   const [logoLoaded, setLogoLoaded] = useState(false);
   
-  const targetText = 'TALES HOUSE';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234?56789';
+  const targetText = 'TALE HOUSE';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234?56789*%$£@!';
 
   useEffect(() => {
     let iteration = 0;
