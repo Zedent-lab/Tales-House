@@ -3,5 +3,10 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+<<<<<<< HEAD:vite.config.js.bak
+=======
+  base: '/Tales-House/', // <-- Base path for GitHub Pages deployment
+>>>>>>> main:vite.config.js
   plugins: [react()],
 })
+
