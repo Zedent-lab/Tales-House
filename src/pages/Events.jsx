@@ -120,7 +120,7 @@ const EventsPage = () => {
           className="w-64 md:w-80 lg:w-96 h-auto mb-8 filter drop-shadow-lg animate-pulse"
         />
         <h1 className="text-6xl font-bold text-center mb-4 bg-gradient-to-r from-white via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-          TALES HOUSE EVENTS
+          TALE HOUSE EVENTS
         </h1>
         <p className="text-xl text-center opacity-80 mb-12 tracking-widest">
           WHERE STORIES UNFOLD ACROSS THE GLOBE
