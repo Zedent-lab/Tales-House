@@ -102,7 +102,7 @@ const Members = () => {
         <div className="text-center mb-16">
           <div className="w-48 h-48 mx-auto mb-8 flex items-center justify-center">
             <img 
-              src="https://i.imgur.com/XkDQqzr.png" 
+              src="/Tale-House-Official-Logo.png" 
               alt="Tales House Logo" 
               className="max-w-full max-h-full object-contain opacity-90"
             />

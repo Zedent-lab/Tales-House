@@ -115,7 +115,7 @@ const EventsPage = () => {
       <section className="hero-section">
         {/* Main logo - much bigger to occupy more space */}
         <img 
-          src="https://i.imgur.com/XkDQqzr.png" 
+          src="/Tale-House-Official-Logo.png" 
           alt="Tales House Logo" 
           className="w-64 md:w-80 lg:w-96 h-auto mb-8 filter drop-shadow-lg animate-pulse"
         />
@@ -129,7 +129,7 @@ const EventsPage = () => {
 
       {/* ===== FLOATING LOGO - TOP RIGHT ===== */}
       <img 
-        src="https://i.imgur.com/XkDQqzr.png" 
+        src="/Tale-House-Official-Logo.png" 
         alt="Tales House Logo" 
         className="fixed top-5 right-5 w-16 h-auto opacity-70 hover:opacity-100 transition-opacity duration-300 z-50"
       />
@@ -139,7 +139,7 @@ const EventsPage = () => {
         {/* Section header with logo */}
         <div className="text-center mb-16">
           <img 
-            src="https://i.imgur.com/XkDQqzr.png" 
+            src="/Tale-House-Official-Logo.png" 
             alt="Tales House Logo" 
             className="w-20 h-auto mx-auto mb-4 opacity-80"
           />
@@ -286,7 +286,7 @@ const EventsPage = () => {
       {/* ===== FOOTER SECTION ===== */}
       <footer className="bg-gradient-to-r from-purple-900/20 to-indigo-900/20 backdrop-blur-sm border-t border-purple-500/30 py-12 text-center">
         <img 
-          src="https://i.imgur.com/XkDQqzr.png" 
+          src="/Tale-House-Official-Logo.png" 
           alt="Tales House Logo" 
           className="w-24 h-auto mx-auto mb-4"
         />

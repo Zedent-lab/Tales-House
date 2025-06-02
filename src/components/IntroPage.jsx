@@ -73,7 +73,7 @@ const IntroPage = ({ onComplete }) => {
             transition: 'opacity 300ms ease-out'
           }}>
             <img 
-              src="https://i.imgur.com/XkDQqzr.png" 
+              src="/Tale-House-Official-Logo.png" 
               alt="Tales House Logo"
               className="w-42 h-42 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto opacity-95 object-contain"
               onLoad={() => setLogoLoaded(true)}

@@ -368,7 +368,7 @@ const TalesHouseLanding = () => {
           <div className={`mb-16 transition-all duration-1000 ${isVisible.home ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="w-48 h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 mx-auto mb-12 flex items-center justify-center hover:scale-105 transition-transform duration-500">
               <img 
-                src="https://i.imgur.com/XkDQqzr.png" 
+                src="/Tale-House-Official-Logo.png" 
                 alt="Tales House Logo" 
                 className="w-full h-full object-contain"
               />
@@ -655,7 +655,7 @@ const TalesHouseLanding = () => {
       <div className="flex items-center space-x-4 mb-4 md:mb-0">
         <div className="w-8 h-8 flex items-center justify-center">
           <img 
-            src="https://i.imgur.com/XkDQqzr.png" 
+            src="/Tale-House-Official-Logo.png" 
             alt="Tales House Logo" 
             className="w-12 h-12 object-contain"
           />
