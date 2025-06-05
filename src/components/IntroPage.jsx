@@ -73,10 +73,11 @@ const IntroPage = ({ onComplete }) => {
             transition: 'opacity 300ms ease-out'
           }}>
             <img 
-              src="https://raw.githubusercontent.com/Zedent-lab/Tales-House/main/public/Tale-House-Official-Logo.png"
+              src="https://github.com/Zedent-lab/Tales-House/blob/main/public/Tale-House-Official-Logo.png?raw=true"
               className="w-42 h-42 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 xl:w-72 xl:h-72 mx-auto opacity-95 object-contain"
               onLoad={() => setLogoLoaded(true)}
               onError={(e) => {
+                console.log('Image failed to load');
                 e.target.style.display = 'none';
               }}
             />
@@ -107,12 +108,6 @@ const IntroPage = ({ onComplete }) => {
           </div>
         </div>
       </div>
-
-      {/* Minimal corner accents - very subtle */}
-      <div className="absolute top-6 left-6 w-6 h-6 border-l border-t border-gray-700 opacity-30"></div>
-      <div className="absolute top-6 right-6 w-6 h-6 border-r border-t border-gray-700 opacity-30"></div>
-      <div className="absolute bottom-6 left-6 w-6 h-6 border-l border-b border-gray-700 opacity-30"></div>
-      <div className="absolute bottom-6 right-6 w-6 h-6 border-r border-b border-gray-700 opacity-30"></div>
     </div>
   );
 };

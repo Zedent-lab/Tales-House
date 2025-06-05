@@ -146,7 +146,7 @@ export default function Navbar() {
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 transition-transform duration-300 group-hover:scale-110">
                 <img 
-                  src="https://raw.githubusercontent.com/Zedent-lab/Tales-House/main/public/Tale-House-Official-Logo.png"
+                  src="https://github.com/Zedent-lab/Tales-House/blob/main/public/Tale-House-Official-Logo.png?raw=true"
                   alt="Tales House Logo" 
                   className="w-full h-full object-contain group-hover:brightness-125 transition-all duration-300" 
                 />
@@ -416,7 +416,7 @@ export default function Navbar() {
                 alt="Logo" 
                 className="w-8 h-8 object-contain" 
               />
-              <span className="text-lg font-bold text-white">Tales House</span>
+              <span className="text-lg font-bold text-white">Tale House</span>
             </div>
             <button 
               onClick={() => setIsOpen(false)}
