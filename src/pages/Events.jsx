@@ -115,7 +115,7 @@ const EventsPage = () => {
       <section className="hero-section">
         {/* Main logo - much bigger to occupy more space */}
         <img 
-          src="/Tale-House-Official-Logo.png" 
+          src="https://raw.githubusercontent.com/Zedent-lab/Tales-House/main/public/Tale-House-Official-Logo.png"
           alt="Tales House Logo" 
           className="w-64 md:w-80 lg:w-96 h-auto mb-8 filter drop-shadow-lg animate-pulse"
         />
@@ -129,7 +129,7 @@ const EventsPage = () => {
 
       {/* ===== FLOATING LOGO - TOP RIGHT ===== */}
       <img 
-        src="/Tale-House-Official-Logo.png" 
+        src="https://raw.githubusercontent.com/Zedent-lab/Tales-House/main/public/Tale-House-Official-Logo.png"
         alt="Tales House Logo" 
         className="fixed top-5 right-5 w-16 h-auto opacity-70 hover:opacity-100 transition-opacity duration-300 z-50"
       />
