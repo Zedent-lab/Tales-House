@@ -1,73 +1,79 @@
-# Tales House Landing Page
+# tales house landing page
 
-A premium, interactive landing page for the Tales House creator collective built with React and Vite.
+landing page for tales house - kenyan content creator collective
 
-## Features
+## what is this
 
-- ✨ Custom animated cursor
-- 🌟 Shooting stars background animation
-- 🎨 Beautiful gradient designs
-- 📱 Fully responsive
-- ⚡ Optimized performance with requestAnimationFrame
-- 🎯 Smooth scroll parallax effects
+interactive website for our creator group. has animations and stuff. looks decent i guess.
 
-## Getting Started
+## features
 
-### Prerequisites
+- cursor thing that follows your mouse around
+- some stars in the background that move
+- gradients everywhere because why not  
+- works on mobile (tested on my phone)
+- doesn't lag too much
+- scroll effects that are kinda smooth
 
-- Node.js (v16 or higher)
-- npm or yarn
+## setup
 
-### Installation
+need nodejs. if you dont have it get it.
 
-1. Clone or create this project directory
-2. Install dependencies:
-
-```bash
-npm install
 ```
-
-3. Start the development server:
-
-```bash
+npm install
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+go to localhost:5173 or whatever it says in terminal
 
-## Available Scripts
+## stuff you can run
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run lint` - Run ESLint
+```
+npm run dev - starts the thing
+npm run build - makes it ready for production  
+npm run preview - tests production build
+npm run lint - tells you whats broken
+```
 
-## Project Structure
+## folders
 
 ```
 src/
-  ├── App.jsx          # Main component
-  ├── main.jsx         # Entry point
-  └── index.css        # Tailwind imports
+  App.jsx - main component with everything
+  main.jsx - react entry point
+  index.css - tailwind imports
 ```
 
-## Customization
+thats it. kept it simple.
 
-- Update social media links in the social icons section
-- Modify button click handlers to point to your actual pages
-- Adjust colors, animations, and content as needed
-- Replace placeholder stats with real data
+## customizing
 
-## Technologies Used
+- change social links to actual ones
+- update the stats (currently just random numbers)
+- swap colors if you want different vibes
+- replace placeholder content with real stuff
+- button links go nowhere right now so fix that
 
-- React 18
-- Vite
-- Tailwind CSS
-- Modern CSS animations
+## tech stack
 
-## Performance Notes
+react, vite, tailwind css, bunch of css animations
 
-- Uses requestAnimationFrame for smooth cursor tracking
-- Throttled scroll events for better performance
-- Optimized animations with will-change property
-- Efficient re-renders with useCallback hooks
+## performance notes
+
+used requestAnimationFrame for cursor so it doesnt kill your browser. scroll events are throttled. animations use proper css properties. should run smooth on most devices.
+
+## notes
+
+made this for tales house kenya. cursor animation might be too much for some people but creators seem to like flashy stuff. stars are subtle. everything responsive because its 2025.
+
+probably needs some real content and actual links but the foundation is there. feel free to break it and make it better.
+
+## todo
+
+- [ ] add real content  
+- [ ] fix button links
+- [ ] maybe add more animations?
+- [ ] test on more devices
+- [ ] add contact form maybe
+
+built by Clay Gitobu for tales house collective, Kenyan tiktok house.
