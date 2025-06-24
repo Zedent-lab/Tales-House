@@ -6,7 +6,8 @@ import Navbar from "./components/Navbar.jsx";
 import StarBackground from "./components/StarBackground.jsx";
 import BackgroundWrapper from "./components/Background.jsx";
 // import IntroPage from "./components/IntroPage.jsx";
-import IntroPage from "./components/Intropage.jsx";
+// import Intropage from "./components/Intropage.jsx";
+import IntroAnimation from "./components/IntroAnimation.jsx";
 // RollupError: Could not resolve "./components/Intropage.jsx" from "src/App.jsx"
 const Home = React.lazy(() => import("./pages/Home.jsx"));
 const Members = React.lazy(() => import("./pages/Members.jsx"));
@@ -64,7 +65,7 @@ const AppContent = ({ showIntro, handleIntroComplete }) => {
             transition: "opacity 150ms ease-out",
           }}
         >
-          <IntroPage onComplete={handleTransition} />
+          <IntroAnimation onComplete={handleTransition} />
         </div>
       )}
 
