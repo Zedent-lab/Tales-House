@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const IntroPage = ({ onComplete }) => {
+const Intropage = ({ onComplete }) => {
   const [currentText, setCurrentText] = useState('');
   const [isAnimating, setIsAnimating] = useState(true);
   const [showTransition, setShowTransition] = useState(false);
