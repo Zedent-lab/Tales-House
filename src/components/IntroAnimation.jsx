@@ -112,4 +112,4 @@ const IntroAnimation = ({ onComplete }) => {
   );
 };
 
-export default IntroPage;
+export default IntroAnimation;
