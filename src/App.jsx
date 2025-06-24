@@ -1,14 +1,11 @@
 import React, { Suspense, useState, useEffect } from "react";
 import { HashRouter as Router, Routes, Route, useLocation, useNavigate, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
-import { AuthProvider, useAuth } from "./context/AuthContext"; // Fixed import
+import { AuthProvider, useAuth } from "./context/AuthContext"; 
 import Navbar from "./components/Navbar.jsx";
 import StarBackground from "./components/StarBackground.jsx";
 import BackgroundWrapper from "./components/Background.jsx";
-// import IntroPage from "./components/IntroPage.jsx";
-// import Intropage from "./components/Intropage.jsx";
 import IntroAnimation from "./components/IntroAnimation.jsx";
-// RollupError: Could not resolve "./components/Intropage.jsx" from "src/App.jsx"
 const Home = React.lazy(() => import("./pages/Home.jsx"));
 const Members = React.lazy(() => import("./pages/Members.jsx"));
 const Shop = React.lazy(() => import("./pages/Shop.jsx"));
