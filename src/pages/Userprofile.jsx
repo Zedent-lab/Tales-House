@@ -1,77 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import BackgroundWrapper from '../components/Background';
+import { useAuth } from '../context/AuthContext'; // Assuming AuthContext provides user info
+import { fetchUserData, fetchCartItems, fetchBookings, fetchPurchaseHistory } from '../api/userApi'; // Mock API functions
 
 const Userprofile = () => {
+  const { user } = useAuth();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState('profile');
+  const [userData, setUserData] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [purchaseHistory, setPurchaseHistory] = useState([]);
+  const [error, setError] = useState(null); // New state for error handling
 
-  // Mock data - replace with actual data from your backend
-  const userData = {
-    name: "xxxxx",
-    email: "xxxxxx",
-    phone: "xxxxxx",
-    memberSince: "xxxxxx",
-    avatar: "/api/placeholder/120/120"
-  };
-
-  const cartItems = [
-    {
-      id: 1,
-      title: "The Midnight Chronicles",
-      type: "Premium Story",
-      price: 12.99,
-      image: "/api/placeholder/80/80",
-      duration: "45 min"
-    },
-    {
-      id: 2,
-      title: "Whispers of the Past",
-      type: "Interactive Tale",
-      price: 8.99,
-      image: "/api/placeholder/80/80",
-      duration: "30 min"
+  useEffect(() => {
+    // Check for the 'tab' query parameter in the URL
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab) {
+      setActiveTab(tab);
     }
-  ];
+  }, [location]);
 
-  const bookings = [
-    {
-      id: 1,
-      title: "The Enchanted Forest",
-      type: "Live Experience",
-      date: "June 15, 2025",
-      time: "7:00 PM",
-      status: "Confirmed",
-      price: 25.00,
-      image: "/api/placeholder/80/80"
-    },
-    {
-      id: 2,
-      title: "Mystery at the Manor",
-      type: "Interactive Session",
-      date: "June 22, 2025",
-      time: "8:30 PM",
-      status: "Pending",
-      price: 18.50,
-      image: "/api/placeholder/80/80"
+  useEffect(() => {
+    if (user) {
+      const fetchData = async () => {
+        try {
+          const [userData, cart, bookings, history] = await Promise.all([
+            fetchUserData(user.id),
+            fetchCartItems(user.id),
+            fetchBookings(user.id),
+            fetchPurchaseHistory(user.id),
+          ]);
+          setUserData(userData);
+          setCartItems(cart);
+          setBookings(bookings);
+          setPurchaseHistory(history);
+        } catch (err) {
+          setError('Failed to load data. Please try again later.');
+        }
+      };
+      fetchData();
     }
-  ];
-
-  const purchaseHistory = [
-    {
-      id: 1,
-      title: "Tales of Wonder Collection",
-      date: "May 28, 2025",
-      price: 34.99,
-      status: "Completed"
-    },
-    {
-      id: 2,
-      title: "The Dragon's Quest",
-      date: "May 15, 2025",
-      price: 15.99,
-      status: "Completed"
-    }
-  ];
+  }, [user]);
 
   const TabButton = ({ id, label, isActive, onClick }) => (
     <button
@@ -148,9 +121,13 @@ const Userprofile = () => {
   );
 
   const renderTabContent = () => {
+    if (error) {
+      return <p className="text-red-500">{error}</p>;
+    }
+
     switch (activeTab) {
       case 'profile':
-        return (
+        return userData ? (
           <div className="space-y-8">
             <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50">
               <div className="flex items-center space-x-6 mb-8">
@@ -207,16 +184,21 @@ const Userprofile = () => {
               </button>
             </div>
           </div>
+        ) : (
+          <p className="text-gray-300">Loading profile...</p>
         );
 
       case 'cart':
+        const subtotal = cartItems.reduce((acc, item) => acc + item.price, 0);
+        const tax = (subtotal * 0.1).toFixed(2); // Example: 10% tax
+        const total = (subtotal + parseFloat(tax)).toFixed(2);
+
         return (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-white">Shopping Cart</h2>
               <span className="text-gray-300">{cartItems.length} items</span>
             </div>
-            
             <div className="space-y-4">
               {cartItems.map(item => (
                 <CartItem key={item.id} item={item} />
@@ -226,18 +208,21 @@ const Userprofile = () => {
             <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-gray-300">Subtotal:</span>
-                <span className="text-white font-semibold">$21.98</span>
+                <span className="text-white font-semibold">${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between items-center mb-4">
                 <span className="text-gray-300">Tax:</span>
-                <span className="text-white font-semibold">$2.20</span>
+                <span className="text-white font-semibold">${tax}</span>
               </div>
               <div className="border-t border-gray-600 pt-4">
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-lg font-semibold text-white">Total:</span>
-                  <span className="text-lg font-bold text-white">$24.18</span>
+                  <span className="text-lg font-bold text-white">${total}</span>
                 </div>
-                <button className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300">
+                <button
+                  className="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+                  disabled={cartItems.length === 0} // Disable if cart is empty
+                >
                   Proceed to Checkout
                 </button>
               </div>
@@ -318,7 +303,7 @@ const Userprofile = () => {
           />
           <TabButton 
             id="history" 
-            label="History" 
+            label="History" // Reverted label
             isActive={activeTab === 'history'} 
             onClick={setActiveTab} 
           />
@@ -326,7 +311,7 @@ const Userprofile = () => {
 
         {/* Tab Content */}
         <div className="min-h-[60vh]">
-          {renderTabContent()}
+          {renderTabContent()} // Reverted content rendering
         </div>
       </div>
     </BackgroundWrapper>

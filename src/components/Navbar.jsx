@@ -120,6 +120,8 @@ export default function Navbar() {
     { to: "/members", label: "Members", icon: "👥" },
     { to: "/shop", label: "Shop", icon: "🛍️" },
     { to: "/contact", label: "Contact", icon: "📧" },
+    { to: "/vote", label: "Vote", icon: "🗳️" },
+    // Removed the Dashboard link
   ];
 
   const activeClass = `text-purple-400 font-medium relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-400 after:to-pink-400 after:transform after:scale-x-100`;
@@ -223,7 +225,7 @@ export default function Navbar() {
               {/* Cart - Only show if user is logged in */}
               {user && (
                 <Link 
-                  to="/cart" 
+                  to="/userprofile?tab=cart" // Link directly to the cart tab in Userprofile
                   className="relative p-2 text-gray-300 hover:text-purple-300 transition-all duration-300 hover:bg-white/10 rounded-lg transform hover:scale-110"
                   aria-label={`Shopping cart with ${cartCount} items`}
                 >

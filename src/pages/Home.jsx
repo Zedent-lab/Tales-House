@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Instagram, ExternalLink, Calendar, MapPin, ArrowDown } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Enhanced Star Background Component
 const StarBackground = () => {
@@ -272,6 +273,7 @@ const TalesHouseLanding = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -433,6 +435,16 @@ const TalesHouseLanding = () => {
           </div>
         </button>
       </section>
+
+      {/* Voting Button */}
+      <div className="absolute top-[calc(100vh-8rem)] left-1/2 transform -translate-x-1/2 z-20">
+        <button
+          onClick={() => navigate('/vote')}
+          className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+        >
+          Go to Voting Page
+        </button>
+      </div>
 
       {/* Events Section */}
       <section id="events" className="relative py-32 z-10">
@@ -622,7 +634,7 @@ const TalesHouseLanding = () => {
     
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
       <a 
-        href="https://www.instagram.com/talehousee/" 
+        href="https://www.instagram.com/officialtalehouse/" 
         target="_blank" 
         rel="noopener noreferrer"
         className="group p-8 border border-white/10 hover:border-purple-400/30 hover:bg-gradient-to-br hover:from-purple-600/5 hover:to-purple-800/5 transition-all duration-500 rounded-xl backdrop-blur-sm hover:scale-105"
@@ -645,6 +657,14 @@ const TalesHouseLanding = () => {
         <p className="text-white/60 text-sm">@talehousee</p>
       </a>
     </div>
+
+    {/* Button to navigate to the Vote page */}
+    <button
+      onClick={() => navigate('/vote')}
+      className="mt-8 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-lg hover:shadow-lg transition-all duration-300"
+    >
+      Go to Voting Page
+    </button>
   </div>
 </section>
 

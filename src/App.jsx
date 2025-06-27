@@ -15,6 +15,8 @@ const Login = React.lazy(() => import("./pages/Login.jsx"));
 const ProductDetail = React.lazy(() => import("./pages/ProductDetail.jsx"));
 const Events = React.lazy(() => import("./pages/Events.jsx"));
 const Userprofile = React.lazy(() => import("./pages/Userprofile.jsx"));
+const Vote = React.lazy(() => import("./pages/Vote.jsx"));
+const Dashboard = React.lazy(() => import("./pages/Dashboard.jsx"));
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -105,6 +107,8 @@ const AppContent = ({ showIntro, handleIntroComplete }) => {
                     <Userprofile />
                   </ProtectedRoute>
                 } />
+                <Route path="/vote" element={<Vote />} />
+                <Route path="/dashboard" element={<Dashboard />} />
               </Routes>
             </Suspense>
           </main>
