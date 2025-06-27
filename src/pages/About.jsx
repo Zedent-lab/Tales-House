@@ -6,7 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import { fetchUserData, fetchCartItems, fetchBookings, fetchPurchaseHistory } from '../api/userApi';
 
 const Userprofile = () => {
-  const { user } = useAuth(); // Ensure `useAuth` provides the correct user object
+  const { user } = useAuth();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('profile');
   const [userData, setUserData] = useState(null);
@@ -24,7 +24,7 @@ const Userprofile = () => {
   }, [location]);
 
   useEffect(() => {
-    if (user && user.id) {
+    if (user) {
       const fetchData = async () => {
         try {
           const [userData, cart, bookings, history] = await Promise.all([
@@ -42,8 +42,6 @@ const Userprofile = () => {
         }
       };
       fetchData();
-    } else {
-      setError('User is not authenticated. Please log in.');
     }
   }, [user]);
 
